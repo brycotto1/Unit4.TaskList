@@ -2,6 +2,19 @@ import express from "express";
 const app = express();
 export default app;
 
+import taskRouter from "#api/tasks";
+import userRouter from "#api/users";
+import getUserFromToken from "#middleware/getUserFromToken";
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(getUserFromToken);
+
+app.use("/users", userRouter);
+app.use("/tasks", taskRouter);
+
+//PostgreSQL error-handling
 app.use((err, req, res, next) => {
   switch (err.code) {
     // Invalid type

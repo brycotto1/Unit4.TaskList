@@ -64,7 +64,7 @@ describe("/tasks router", () => {
     const response = await request(app)
       .post("/users/login")
       .send({ username: "tasktesttask", password: "password" });
-    token = response.text;
+      token = response.text;
   });
 
   describe("POST /tasks", () => {
